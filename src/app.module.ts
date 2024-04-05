@@ -1,18 +1,24 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { contentModule } from './content/content.Module'; // Agrega esta línea
-import {MongooseModule} from '@nestjs/mongoose';
+import { contentModule } from './content/content.Module';
+import { filesModule } from './files/files.Module';
+import { labelsModule } from './labels/labels.module';
+import { multimediaModule } from './multimedia/multimedia.module';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb+srv://jtiradoverbel06:Juan.tirado20@edit.hhfcfay.mongodb.net/' ) 
-    //contentModule/,
+    MongooseModule.forRoot('mongodb+srv://jtiradoverbel06:Juan.tirado20@edit.hhfcfay.mongodb.net/'),
+    contentModule,
+    filesModule,
+    labelsModule,
+    multimediaModule
   ],
   controllers: [AppController],
   providers: [AppService],
-  })
-  export class AppModule {}
-  
+})
+export class AppModule { }
 
-  
+
+

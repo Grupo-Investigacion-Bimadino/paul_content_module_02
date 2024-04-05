@@ -1,18 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { content } from './schema/content.schema';
+import { Content } from './schema/content.schema';
 
 @Injectable()
 export class contentService {
-  constructor(@InjectModel('content') private readonly contentModel: Model<content>) {}
+  constructor(@InjectModel('content') private readonly contentModel: Model<Content>) { }
 
-  async findOne(id: number): Promise<{}> {
+  async findOne(id: string): Promise<{}> {
     const room = await this.contentModel.find().exec();
     return room;
   }
 
-  async findAll(): Promise<content[]> {
+  async findAll(): Promise<Content[]> {
     const contents = await this.contentModel.find().exec();
     return contents;
   }
@@ -29,8 +29,8 @@ export class contentService {
     return updatedcontent;
   }
 
-  // async delete(id): Promise<{}> {
-  //   const deletedcontent = await this.contentModel.findByIdAndRemove(id);
-  //   return deletedcontent;
-  // }
+  async delete(id): Promise<{}> {
+    const deletedcontent = await this.contentModel.findByIdAndDelete(id);
+    return deletedcontent;
+  }
 }
